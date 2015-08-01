@@ -205,6 +205,33 @@ exports.extname = function(path) {
   return splitPath(path)[3];
 };
 
+exports.parse = function(pathString) {
+    assertPath(pathString);
+
+    var allParts = splitPath(pathString);
+    if (!allParts || allParts.length !== 4) {
+        throw new TypeError("Invalid path '" + pathString + "'");
+    }
+    allParts[1] = allParts[1] || '';
+    allParts[2] = allParts[2] || '';
+    allParts[3] = allParts[3] || '';
+
+    return {
+        root: allParts[0],
+        dir: allParts[0] + allParts[1].slice(0, allParts[1].length - 1),
+        base: allParts[2],
+        ext: allParts[3],
+        name: allParts[2].slice(0, allParts[2].length - allParts[3].length)
+    };
+};
+
+function assertPath(path) {
+  if (typeof path !== 'string') {
+    throw new TypeError('Path must be a string. Received ' +
+                        util.inspect(path));
+  }
+}
+
 function filter (xs, f) {
     if (xs.filter) return xs.filter(f);
     var res = [];
