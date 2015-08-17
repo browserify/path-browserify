@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "description": "the path module from node core for browsers",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "util": "0.10.3"
+  },
   "devDependencies": {
     "tape": "~1.0.4"
   },
