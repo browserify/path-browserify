@@ -20,7 +20,7 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-var isWindows = true;
+var isWindows = false;
 var util = require('util');
 
 // resolves . and .. elements in a path array with directory names there

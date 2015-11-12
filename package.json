@@ -8,6 +8,7 @@
     "tape": "~1.0.4"
   },
   "scripts": {
+    "install": "node install.js",
     "test": "tape test/*.js"
   },
   "repository": {
@@ -25,6 +26,5 @@
     "email": "mail@substack.net",
     "url": "http://substack.net"
   },
-  "license": "MIT",
-  "os" : [ "win32" ]
+  "license": "MIT"
 }
