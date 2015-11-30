@@ -25,5 +25,12 @@
     "email": "mail@substack.net",
     "url": "http://substack.net"
   },
+  "jspm": {
+    "map": {
+      "./index.js": {
+        "node": "@node/path"
+      }
+    }
+  },
   "license": "MIT"
 }
