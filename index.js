@@ -111,7 +111,7 @@ exports.normalize = function(path) {
 
 // posix version
 exports.isAbsolute = function(path) {
-  return path.charAt(0) === '/';
+  return path && path.charAt(0) === '/';
 };
 
 // posix version
