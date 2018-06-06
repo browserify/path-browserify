@@ -161,16 +161,21 @@ var posix = {
   },
 
   join: function join() {
-    if (arguments.length === 0) return '.';
+    if (arguments.length === 0)
+      return '.';
     var joined;
     for (var i = 0; i < arguments.length; ++i) {
       var arg = arguments[i];
       assertPath(arg);
       if (arg.length > 0) {
-        if (joined === undefined) joined = arg;else joined += '/' + arg;
+        if (joined === undefined)
+          joined = arg;
+        else
+          joined += '/' + arg;
       }
     }
-    if (joined === undefined) return '.';
+    if (joined === undefined)
+      return '.';
     return posix.normalize(joined);
   },
 
