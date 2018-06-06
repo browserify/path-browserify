@@ -1,29 +1,30 @@
 {
   "name": "path-browserify",
-  "version": "0.0.0",
   "description": "the path module from node core for browsers",
-  "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {
-    "tape": "^4.9.0"
-  },
-  "scripts": {
-    "test": "node test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/substack/path-browserify.git"
-  },
-  "homepage": "https://github.com/substack/path-browserify",
-  "keywords": [
-    "path",
-    "browser",
-    "browserify"
-  ],
+  "version": "0.0.0",
   "author": {
     "name": "James Halliday",
     "email": "mail@substack.net",
     "url": "http://substack.net"
   },
-  "license": "MIT"
+  "bugs": "https://github.com/browserify/path-browserify/issues",
+  "dependencies": {},
+  "devDependencies": {
+    "tape": "^4.9.0"
+  },
+  "homepage": "https://github.com/browserify/path-browserify",
+  "keywords": [
+    "browser",
+    "browserify",
+    "path"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/browserify/path-browserify.git"
+  },
+  "scripts": {
+    "test": "node test"
+  }
 }
