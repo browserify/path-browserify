@@ -6,3 +6,4 @@ require('./test-path-isabsolute');
 require('./test-path-join');
 require('./test-path-relative');
 require('./test-path-resolve');
+require('./test-path-zero-length-strings');
