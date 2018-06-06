@@ -38,45 +38,56 @@ function normalizeStringPosix(path, allowAboveRoot) {
   var dots = 0;
   var code;
   for (var i = 0; i <= path.length; ++i) {
-    if (i < path.length) code = path.charCodeAt(i);else if (code === 47 /*/*/) break;else code = 47 /*/*/;
+    if (i < path.length)
+      code = path.charCodeAt(i);
+    else if (code === 47 /*/*/)
+      break;
+    else
+      code = 47 /*/*/;
     if (code === 47 /*/*/) {
-        if (lastSlash === i - 1 || dots === 1) {
-          // NOOP
-        } else if (lastSlash !== i - 1 && dots === 2) {
-          if (res.length < 2 || lastSegmentLength !== 2 || res.charCodeAt(res.length - 1) !== 46 /*.*/ || res.charCodeAt(res.length - 2) !== 46 /*.*/) {
-              if (res.length > 2) {
-                var lastSlashIndex = res.lastIndexOf('/');
-                if (lastSlashIndex !== res.length - 1) {
-                  if (lastSlashIndex === -1) {
-                    res = '';
-                    lastSegmentLength = 0;
-                  } else {
-                    res = res.slice(0, lastSlashIndex);
-                    lastSegmentLength = res.length - 1 - res.lastIndexOf('/');
-                  }
-                  lastSlash = i;
-                  dots = 0;
-                  continue;
-                }
-              } else if (res.length === 2 || res.length === 1) {
+      if (lastSlash === i - 1 || dots === 1) {
+        // NOOP
+      } else if (lastSlash !== i - 1 && dots === 2) {
+        if (res.length < 2 || lastSegmentLength !== 2 || res.charCodeAt(res.length - 1) !== 46 /*.*/ || res.charCodeAt(res.length - 2) !== 46 /*.*/) {
+          if (res.length > 2) {
+            var lastSlashIndex = res.lastIndexOf('/');
+            if (lastSlashIndex !== res.length - 1) {
+              if (lastSlashIndex === -1) {
                 res = '';
                 lastSegmentLength = 0;
-                lastSlash = i;
-                dots = 0;
-                continue;
+              } else {
+                res = res.slice(0, lastSlashIndex);
+                lastSegmentLength = res.length - 1 - res.lastIndexOf('/');
               }
+              lastSlash = i;
+              dots = 0;
+              continue;
             }
-          if (allowAboveRoot) {
-            if (res.length > 0) res += '/..';else res = '..';
-            lastSegmentLength = 2;
+          } else if (res.length === 2 || res.length === 1) {
+            res = '';
+            lastSegmentLength = 0;
+            lastSlash = i;
+            dots = 0;
+            continue;
           }
-        } else {
-          if (res.length > 0) res += '/' + path.slice(lastSlash + 1, i);else res = path.slice(lastSlash + 1, i);
-          lastSegmentLength = i - lastSlash - 1;
         }
-        lastSlash = i;
-        dots = 0;
-      } else if (code === 46 /*.*/ && dots !== -1) {
+        if (allowAboveRoot) {
+          if (res.length > 0)
+            res += '/..';
+          else
+            res = '..';
+          lastSegmentLength = 2;
+        }
+      } else {
+        if (res.length > 0)
+          res += '/' + path.slice(lastSlash + 1, i);
+        else
+          res = path.slice(lastSlash + 1, i);
+        lastSegmentLength = i - lastSlash - 1;
+      }
+      lastSlash = i;
+      dots = 0;
+    } else if (code === 46 /*.*/ && dots !== -1) {
       ++dots;
     } else {
       dots = -1;
@@ -106,8 +117,11 @@ var posix = {
 
     for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
       var path;
-      if (i >= 0) path = arguments[i];else {
-        if (cwd === undefined) cwd = process.cwd();
+      if (i >= 0)
+        path = arguments[i];
+      else {
+        if (cwd === undefined)
+          cwd = process.cwd();
         path = cwd;
       }
 
@@ -129,7 +143,10 @@ var posix = {
     resolvedPath = normalizeStringPosix(resolvedPath, !resolvedAbsolute);
 
     if (resolvedAbsolute) {
-      if (resolvedPath.length > 0) return '/' + resolvedPath;else return '/';
+      if (resolvedPath.length > 0)
+        return '/' + resolvedPath;
+      else
+        return '/';
     } else if (resolvedPath.length > 0) {
       return resolvedPath;
     } else {
@@ -161,16 +178,21 @@ var posix = {
   },
 
   join: function join() {
-    if (arguments.length === 0) return '.';
+    if (arguments.length === 0)
+      return '.';
     var joined;
     for (var i = 0; i < arguments.length; ++i) {
       var arg = arguments[i];
       assertPath(arg);
       if (arg.length > 0) {
-        if (joined === undefined) joined = arg;else joined += '/' + arg;
+        if (joined === undefined)
+          joined = arg;
+        else
+          joined += '/' + arg;
       }
     }
-    if (joined === undefined) return '.';
+    if (joined === undefined)
+      return '.';
     return posix.normalize(joined);
   },
 
@@ -188,7 +210,8 @@ var posix = {
     // Trim any leading backslashes
     var fromStart = 1;
     for (; fromStart < from.length; ++fromStart) {
-      if (from.charCodeAt(fromStart) !== 47 /*/*/) break;
+      if (from.charCodeAt(fromStart) !== 47 /*/*/)
+        break;
     }
     var fromEnd = from.length;
     var fromLen = fromEnd - fromStart;
@@ -196,7 +219,8 @@ var posix = {
     // Trim any leading backslashes
     var toStart = 1;
     for (; toStart < to.length; ++toStart) {
-      if (to.charCodeAt(toStart) !== 47 /*/*/) break;
+      if (to.charCodeAt(toStart) !== 47 /*/*/)
+        break;
     }
     var toEnd = to.length;
     var toLen = toEnd - toStart;
@@ -209,20 +233,20 @@ var posix = {
       if (i === length) {
         if (toLen > length) {
           if (to.charCodeAt(toStart + i) === 47 /*/*/) {
-              // We get here if `from` is the exact base path for `to`.
-              // For example: from='/foo/bar'; to='/foo/bar/baz'
-              return to.slice(toStart + i + 1);
-            } else if (i === 0) {
+            // We get here if `from` is the exact base path for `to`.
+            // For example: from='/foo/bar'; to='/foo/bar/baz'
+            return to.slice(toStart + i + 1);
+          } else if (i === 0) {
             // We get here if `from` is the root
             // For example: from='/'; to='/foo'
             return to.slice(toStart + i);
           }
         } else if (fromLen > length) {
           if (from.charCodeAt(fromStart + i) === 47 /*/*/) {
-              // We get here if `to` is the exact base path for `from`.
-              // For example: from='/foo/bar/baz'; to='/foo/bar'
-              lastCommonSep = i;
-            } else if (i === 0) {
+            // We get here if `to` is the exact base path for `from`.
+            // For example: from='/foo/bar/baz'; to='/foo/bar'
+            lastCommonSep = i;
+          } else if (i === 0) {
             // We get here if `to` is the root.
             // For example: from='/foo'; to='/'
             lastCommonSep = 0;
@@ -232,7 +256,10 @@ var posix = {
       }
       var fromCode = from.charCodeAt(fromStart + i);
       var toCode = to.charCodeAt(toStart + i);
-      if (fromCode !== toCode) break;else if (fromCode === 47 /*/*/) lastCommonSep = i;
+      if (fromCode !== toCode)
+        break;
+      else if (fromCode === 47 /*/*/)
+        lastCommonSep = i;
     }
 
     var out = '';
@@ -240,15 +267,21 @@ var posix = {
     // and `from`
     for (i = fromStart + lastCommonSep + 1; i <= fromEnd; ++i) {
       if (i === fromEnd || from.charCodeAt(i) === 47 /*/*/) {
-          if (out.length === 0) out += '..';else out += '/..';
-        }
+        if (out.length === 0)
+          out += '..';
+        else
+          out += '/..';
+      }
     }
 
     // Lastly, append the rest of the destination (`to`) path that comes after
     // the common path parts
-    if (out.length > 0) return out + to.slice(toStart + lastCommonSep);else {
+    if (out.length > 0)
+      return out + to.slice(toStart + lastCommonSep);
+    else {
       toStart += lastCommonSep;
-      if (to.charCodeAt(toStart) === 47 /*/*/) ++toStart;
+      if (to.charCodeAt(toStart) === 47 /*/*/)
+        ++toStart;
       return to.slice(toStart);
     }
   },
@@ -381,8 +414,11 @@ var posix = {
       }
       if (code === 46 /*.*/) {
           // If this is our first dot, mark it as the start of our extension
-          if (startDot === -1) startDot = i;else if (preDotState !== 1) preDotState = 1;
-        } else if (startDot !== -1) {
+          if (startDot === -1)
+            startDot = i;
+          else if (preDotState !== 1)
+            preDotState = 1;
+      } else if (startDot !== -1) {
         // We saw a non-dot and non-path separator before our dot, so we should
         // have a good chance at having a non-empty extension
         preDotState = -1;
@@ -390,18 +426,18 @@ var posix = {
     }
 
     if (startDot === -1 || end === -1 ||
-    // We saw a non-dot character immediately before the dot
-    preDotState === 0 ||
-    // The (right-most) trimmed path component is exactly '..'
-    preDotState === 1 && startDot === end - 1 && startDot === startPart + 1) {
+        // We saw a non-dot character immediately before the dot
+        preDotState === 0 ||
+        // The (right-most) trimmed path component is exactly '..'
+        preDotState === 1 && startDot === end - 1 && startDot === startPart + 1) {
       return '';
     }
     return path.slice(startDot, end);
   },
 
   format: function format(pathObject) {
-    if (pathObject === null || typeof pathObject === 'undefined') {
-      throw new TypeError('Parameter "pathObject" must be an object, not ' + (typeof pathObject));
+    if (pathObject === null || typeof pathObject !== 'object') {
+      throw new TypeError('The "pathObject" argument must be of type Object. Received type ' + typeof pathObject);
     }
     return _format('/', pathObject);
   },
