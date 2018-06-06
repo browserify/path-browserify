@@ -2,7 +2,7 @@
 
 > The `path` module from Node.js for browsers
 
-This implements the Node.js [`path`](http://nodejs.org/api/path.html) module for environments that do not have it, like browsers.
+This implements the Node.js [`path`][path] module for environments that do not have it, like browsers.
 
 > `path-browserify` currently matches the **Node.js 10.3** API.
 
@@ -28,7 +28,7 @@ document.querySelector('#logo').src = logo;
 
 ## API
 
-See the [Node.js path docs](http://nodejs.org/api/path.html). `path-browserify` currently matches the Node.js 10.3 API.
+See the [Node.js path docs][path]. `path-browserify` currently matches the Node.js 10.3 API.
 `path-browserify` only implements the POSIX functions, not the win32 ones.
 
 ## Contributing
@@ -41,3 +41,5 @@ If there is a difference in behaviour between Node.js's `path` module and this m
 ## License
 
 [MIT](./LICENSE)
+
+[path]: https://nodejs.org/docs/v10.3.0/api/path.html
