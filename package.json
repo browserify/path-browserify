@@ -8,7 +8,7 @@
     "tape": "~1.0.4"
   },
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "node test/test-path.js"
   },
   "repository": {
     "type": "git",
