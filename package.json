@@ -1,7 +1,7 @@
 {
   "name": "path-browserify",
   "description": "the path module from node core for browsers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "James Halliday",
     "email": "mail@substack.net",
