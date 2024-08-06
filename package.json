@@ -8,9 +8,8 @@
     "url": "http://substack.net"
   },
   "bugs": "https://github.com/browserify/path-browserify/issues",
-  "dependencies": {},
   "devDependencies": {
-    "tape": "^4.9.0"
+    "tape": "^4.17.0"
   },
   "homepage": "https://github.com/browserify/path-browserify",
   "keywords": [

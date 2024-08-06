@@ -22,8 +22,8 @@ var posixTests =
     // arguments                    result
     [[['/var/lib', '../', 'file/'], '/var/file'],
      [['/var/lib', '/../', 'file/'], '/file'],
-     [['a/b/c/', '../../..'], process.cwd()],
-     [['.'], process.cwd()],
+     [['a/b/c/', '../../..'], "/"],
+     [['.'], "/"],
      [['/some/dir', '.', '/absolute/'], '/absolute'],
      [['/foo/tmp.3/', '../tmp.3/cycles/root.js'], '/foo/tmp.3/cycles/root.js']
     ];

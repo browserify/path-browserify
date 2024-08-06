@@ -7,7 +7,7 @@
 
 var tape = require('tape');
 var path = require('../');
-var pwd = process.cwd();
+var pwd = "/"
 
 tape('path.join zero-length', function (t) {
   // join will internally ignore all the zero-length strings and it will return

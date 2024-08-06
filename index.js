@@ -113,16 +113,13 @@ var posix = {
   resolve: function resolve() {
     var resolvedPath = '';
     var resolvedAbsolute = false;
-    var cwd;
 
     for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
       var path;
       if (i >= 0)
         path = arguments[i];
       else {
-        if (cwd === undefined)
-          cwd = process.cwd();
-        path = cwd;
+        path = "/";
       }
 
       assertPath(path);
